@@ -24,4 +24,4 @@ services:
         volumes:
             - ./../armchair-ai-back:/app
             - ./run:/tmp/run
-        command: uvicorn main:app --uds /tmp/run/uvicorn.sock
+        command: uvicorn app.main:app --uds /tmp/run/uvicorn.sock --reload

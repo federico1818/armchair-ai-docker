@@ -19,9 +19,9 @@ services:
         restart: always
         working_dir: /app
         build:
-            context: ./aa-python-3-14
+            context: ./python-3-14
             dockerfile: Dockerfile
         volumes:
-            - ./../aa-python-3-14:/app
+            - ./../armchair-ai-back:/app
             - ./run:/tmp/run
         command: uvicorn main:app --uds /tmp/run/uvicorn.sock

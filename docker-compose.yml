@@ -1,0 +1,27 @@
+services:
+
+    nginx:
+            image: nginx:1.31.2-alpine
+            container_name: aa-nginx
+            restart: always
+            ports:
+                - 80:80
+            volumes:
+                - ./..:/var/www
+                - ./sites-enabled:/etc/nginx/conf.d
+                - ./run:/tmp/run
+            networks:
+                - default
+
+    python:
+        image: aa-python-3-14
+        container_name: aa-python
+        restart: always
+        working_dir: /app
+        build:
+            context: ./aa-python-3-14
+            dockerfile: Dockerfile
+        volumes:
+            - ./../aa-python-3-14:/app
+            - ./run:/tmp/run
+        command: uvicorn main:app --uds /tmp/run/uvicorn.sock
